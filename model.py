@@ -11,6 +11,7 @@ class Game(db.Model):
 
 	__tablename__ = "games"
 
+	# cross reference with API to make sure columns make sense
 	game_id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
 	genres = db.Column(ARRAY(db.String(10)), nullable=False)
 	available_platforms = db.Column(ARRAY(db.String(10)), nullable=False)
@@ -38,9 +39,10 @@ class Review(db.Model):
 	review_id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
 	game_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
 	user_id = db.Column(db.Integer, db.ForeignKey("games.game_id"), nullable=False)
-	score
-	review_text
-	reviewed_at
+	score = db.Column(db.Integer, nullable=False)
+	review_text = db.Column(db.String(40), nullable=False)
+	#^ I wasn't sure how long to make review text, so I based my choice on https://blog.bufferapp.com/optimal-length-social-media 
+	reviewed_at = db.Column(db.DateTime, nullable=False)
 
 	user = db.relationship("User", backref="reviews")
 	game = db.relationship("Game", backref="reviews")
