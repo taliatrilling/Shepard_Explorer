@@ -16,10 +16,13 @@ class User(db.Model):
 	# password --> need to implement with external library for security purposes
 	joined_at = db.Column(db.DateTime, nullable=False)
 
-	#add repr
+	def __repr__(self):
+		"""Provides helpful information on an instance when printed"""
+
+		return ("<User user_id=%s username=%s>" % (self.user_id, self.username))
 
 class MassEffect1(db.Model):
-	""" """
+	"""Information associated with a single Mass Effect playthrough by a user"""
 
 	__tablename__ = "onesies"
 
@@ -40,10 +43,13 @@ class MassEffect1(db.Model):
 	
 	user = db.relationship("User", backref="masseffect1")
 
-	#add repr
+	def __repr__(self):
+		"""Provides helpful information on an instance when printed"""
+
+		return ("<ME1 char_id=%s user_id=%s shep_name=%s>" % (self.char_id, self.user_id, self.shep_name))
 
 class MassEffect2(db.Model):
-	""" """
+	"""Information associated with a single Mass Effect 2 playthrough by a user"""
 
 	__tablename__ = "twosies"
 
@@ -94,8 +100,13 @@ class MassEffect2(db.Model):
 
 	user = db.relationship("User", backref="masseffect2")
 
+	def __repr__(self):
+		"""Provides helpful information on an instance when printed"""
+
+		return ("<ME2 char_id=%s user_id=%s shep_name=%s>" % (self.char_id, self.user_id, self.shep_name))
+
 class MassEffect3(db.Model):
-	""" """
+	"""Information associated with a single Mass Effect 3 playthrough by a user"""
 
 	__tablename__ = "threesies"
 
@@ -121,12 +132,33 @@ class MassEffect3(db.Model):
 
 	user = db.relationship("User", backref="masseffect3")
 
-# class LinkedPlaythroughChars(db.Model):
-# 	""" """
+	def __repr__(self):
+		"""Provides helpful information on an instance when printed"""
 
-# 	__tablename__ = "playthroughs"
+		return ("<ME3 char_id=%s user_id=%s shep_name=%s>" % (self.char_id, self.user_id, self.shep_name))
 
 
+class LinkedPlaythroughChars(db.Model):
+	"""Information associated with one triad or duo of linked playthroughs by one user"""
+
+	__tablename__ = "playthroughs"
+
+	playthrough_id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
+	user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
+	games_played = db.Column(db.Integer, nullable=False) #100, 110, 111, 010, 011, 001
+	char1_id = db.Column(db.Integer, db.ForeignKey("onesies.char_id"), nullable=True) #nullable because game may be skipped
+	char2_id = db.Column(db.Integer, db.ForeignKey("twosies.char_id"), nullable=True) #nullable because game may be skipped
+	char3_id = db.Column(db.Integer, db.ForeignKey("threesies.char_id"), nullable=True) #nullable because game may be skipped
+
+	user = db.relationship("User", backref="playthrough")
+	masseffect1 = db.relationship("MassEffect1", backref="playthrough")
+	masseffect2 = db.relationship("MassEffect2", backref="playthrough")
+	masseffect3 = db.relationship("MassEffect3", backref="playthrough")
+
+	def __repr__(self):
+		"""Provides helpful information on an instance when printed"""
+
+		return ("<Playthrough playthrough_id=%s user_id=%s>" % (self.playthrough_id, self.user_id))
 	
 
 
