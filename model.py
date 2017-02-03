@@ -46,7 +46,7 @@ class Character(db.Model):
 		return ("<Character char_id=%s user_id=%s shep_name=%s>" % (self.char_id, self.user_id, self.shep_name))
 
 class Decision(db.Model):
-	""" """
+	"""Specific decisions made across the trilogy"""
 
 	__tablename__ = "decisions"
 
@@ -60,7 +60,7 @@ class Decision(db.Model):
 		return ("<Decision decision_id=%s decision=%s>" % (self.decision_id, self.decision))
 
 class Outcome(db.Model):
-	""" """
+	"""Specific outcomes associated with different decisions -- at least 2 outcomes to every decision"""
 	
 	__tablename__ = "outcomes"
 
@@ -76,7 +76,7 @@ class Outcome(db.Model):
 		return ("<Outcome outcome_id=%s decision_id=%s outcome=%s>" % (self.outcome_id, self.decision_id, self.outcome))
 
 class DecisionMade(db.Model):
-	""" """
+	"""For a given user's character, what decision was made for a certain outcome"""
 
 	__tablename__ = "decisionsmade"
 
@@ -95,7 +95,7 @@ class DecisionMade(db.Model):
 		return ("<DecisionMade char_id=%s outcome_id=%s>" % (self.char_id, self.outcome_id))
 
 class Squadmate(db.Model):
-	""" """
+	"""All squadmates requiring statuses (Mass Effect 2)"""
 
 	__tablename__ = "squadmates"
 	
@@ -108,7 +108,7 @@ class Squadmate(db.Model):
 		return ("<Squadmate squadmate_id=%s name=%s>" % (self.squadmate, self.name))
 
 class SquadOutcome(db.Model):
-	""" """
+	"""For a given user's character, a certain squadmate's status"""
 
 	__tablename__ = "squadoutcomes"
 

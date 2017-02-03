@@ -50,6 +50,14 @@ def add_outcome(user_id, char_id, decision, outcome):
 	db.session.commit()
 	return dm.made_id
 
+def add_squadmate_status(char_id, squadmate_id, status_code):
+	"""Add a specific squadmate status for a specific character"""
+
+	status = SquadOutcome(squadmate_id=squadmate_id, char_id=char_id, status=status_code)
+	db.session.add(status)
+	db.session.commit()
+	return status.squad_outcome_id
+
 def get_character_decision_made(char_id, decision):
 	"""Get outcome for a certain character's decision"""
 
@@ -61,6 +69,20 @@ def get_possible_outcomes(decision):
 
 	possibilites = Outcome.query.filter(Outcome.decision_id == decision).all()
 	return possibilites
+
+def get_squadmate_status(char_id, squadmate_id):
+	"""Get the squadmate status for a specific character/squadmate"""
+
+	status = SquadOutcome.query.filter(SquadOutcome.char_id == char_id, SquadOutcome.squadmate_id == squadmate_id).first()
+	return status.status
+
+def determine_ending_options(made_id):
+	"""Get possible endings for given war readiness"""
+	pass
+
+def determine_ending_effects(made_id):
+	"""For ending chosen, what to add to database/assume occured"""
+	pass
 
 #route functions
 
