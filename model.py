@@ -4,17 +4,34 @@ from flask_sqlalchemy import SQLAlchemy
 
 from datetime import datetime
 
+from passlib.hash import bcrypt
+
 db = SQLAlchemy()
 
 class User(db.Model):
 	"""Information associated with a specific user"""
 
+	# code help on passwords by X-Istence from http://stackoverflow.com/a/33717279
+
 	__tablename__ = "users"
 
 	user_id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
 	username = db.Column(db.String(20), nullable=False, unique=True)
-	# password --> need to implement with external library for security purposes
+	password = db.Column(db.String(80), nullable=False)
 	joined_at = db.Column(db.DateTime, nullable=False)
+
+	def __init__(self, username, password, joined_at):
+		"""Passes in appropriate parameters to user registration, and creates 
+		encrypted hash of password for database"""
+
+		self.username = username
+		self.password = bcrypt.encrypt(password)
+		self.joined_at = joined_at
+
+	def validate_pword(self, password):
+		"""Validates password hash"""
+
+		return bcrypt.verify(password, self.password)
 
 	def __repr__(self):
 		"""Provides helpful information on an instance when printed"""

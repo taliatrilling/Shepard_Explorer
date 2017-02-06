@@ -122,6 +122,27 @@ def determine_ending_effects(ending_made_id, score, char_id):
 
 #route functions
 
+@app.route("/")
+def home():
+	"""Homepage route"""
+
+	return render_template("home.html")
+
+
+@app.route("/register")
+def register():
+	""" """
+	pass
+
+
+@app.route("/registration-complete")
+def register_complete():
+	""" """
+	pass
+
+
+
+
 if __name__ == "__main__":
 	app.debug = True
 	connect_to_db(app)
