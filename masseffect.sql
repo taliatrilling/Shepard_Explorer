@@ -477,7 +477,7 @@ COPY decisionsmade (made_id, char_id, decision_id, outcome_id) FROM stdin;
 -- Name: decisionsmade_made_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taliatrilling
 --
 
-SELECT pg_catalog.setval('decisionsmade_made_id_seq', 1, false);
+SELECT pg_catalog.setval('decisionsmade_made_id_seq', 2, true);
 
 
 --
@@ -487,66 +487,80 @@ SELECT pg_catalog.setval('decisionsmade_made_id_seq', 1, false);
 COPY outcomes (outcome_id, decision_id, outcome) FROM stdin;
 1	1	Kaidan
 2	1	Ashley
-7	2	spared
-8	2	killed
-9	3	saved
-10	3	dead
-11	4	alive
-12	4	dead
-13	5	alive
-14	5	dead
-15	6	Ashley
-16	6	Liara
-17	6	Kaidan
-18	6	none
-19	7	Jack
-20	7	Miranda
-21	7	Tali
-22	7	Jacob
-23	7	Garrus
-24	7	Thane
-25	7	none
-26	8	saved
-27	8	destroyed
-29	9	chakwas only
-30	9	half dead
-31	9	all survive
-32	10	loyal escort
-33	10	non loyal escort
-34	10	no escort
-35	11	destroyed
-36	11	saved
-37	12	success
-38	12	fail
-39	13	Miranda
-40	13	Tali
-41	13	Jack
-42	13	Ashley
-43	13	Steve
-44	13	Samantha
-45	13	Garrus
-46	13	Kaidan
-47	13	Liara
-48	14	saved
-49	14	ignored
-50	15	saved
-51	15	sacrificed
-52	17	saved
-53	17	dead
-54	17	unknown
-55	18	stopped suicide
-56	18	let suicide occur
-57	18	samara not seen
-58	19	cure sabotaged
-59	19	cure completed
-60	20	peace brokered
-61	20	quarians only
-62	20	geth only
-63	21	convinced
-64	21	unconvinced
-65	22	low
-66	22	medium
-67	22	high
+3	2	spared
+4	2	killed
+5	3	saved
+6	3	dead
+7	4	alive
+8	4	dead
+9	5	alive
+10	5	dead
+11	6	Ashley
+12	6	Liara
+13	6	Kaidan
+14	6	none
+15	7	Jack
+16	7	Miranda
+17	7	Tali
+18	7	Jacob
+19	7	Garrus
+20	7	Thane
+21	7	none
+22	8	saved
+23	8	destroyed
+24	9	chakwas only
+25	9	half dead
+26	9	all survive
+27	10	loyal escort
+28	10	non loyal escort
+29	10	no escort
+30	11	destroyed
+31	11	saved
+32	12	success
+33	12	fail
+34	13	Miranda
+35	13	Tali
+36	13	Jack
+37	13	Ashley
+38	13	Steve
+39	13	Samantha
+40	13	Garrus
+41	13	Kaidan
+42	13	Liara
+43	14	saved
+44	14	ignored
+45	15	saved
+46	15	sacrificed
+47	17	saved
+48	17	dead
+49	17	unknown
+50	18	stopped suicide
+51	18	let suicide occur
+52	18	samara not seen
+53	19	cure sabotaged
+54	19	cure completed
+55	20	peace brokered
+56	20	quarians only
+57	20	geth only
+58	21	convinced
+59	21	unconvinced
+60	22	1749
+61	22	2049
+62	22	2349
+63	22	2649
+64	22	2799
+65	22	3999
+66	22	4000
+67	23	destroy
+68	23	control
+69	23	synthesis
+70	23	refusal
+71	24	vaporized
+72	24	devastated
+73	24	saved
+74	25	no survivors
+75	25	survive
+76	25	survive synthesized
 \.
 
 
@@ -554,7 +568,7 @@ COPY outcomes (outcome_id, decision_id, outcome) FROM stdin;
 -- Name: outcomes_outcome_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taliatrilling
 --
 
-SELECT pg_catalog.setval('outcomes_outcome_id_seq', 67, true);
+SELECT pg_catalog.setval('outcomes_outcome_id_seq', 76, true);
 
 
 --
@@ -718,14 +732,6 @@ ALTER TABLE ONLY decisionsmade
 
 ALTER TABLE ONLY decisionsmade
     ADD CONSTRAINT decisionsmade_decision_id_fkey FOREIGN KEY (decision_id) REFERENCES decisions(decision_id);
-
-
---
--- Name: decisionsmade decisionsmade_outcome_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: taliatrilling
---
-
-ALTER TABLE ONLY decisionsmade
-    ADD CONSTRAINT decisionsmade_outcome_id_fkey FOREIGN KEY (outcome_id) REFERENCES outcomes(outcome_id);
 
 
 --
