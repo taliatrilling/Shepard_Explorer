@@ -149,6 +149,11 @@ def connect_to_db(app, uri="postgresql:///masseffect"):
 	db.app = app
 	db.init_app(app)
 
+def make_test_data():
+	"""Instantiates a test database to be used in tests.py"""
+
+	pass
+
 if __name__ == '__main__':
 	from server import app
 	connect_to_db(app)

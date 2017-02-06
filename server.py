@@ -131,13 +131,15 @@ def home():
 
 @app.route("/register")
 def register():
-	""" """
+	"""Route to register a new user"""
+	
 	pass
 
 
-@app.route("/registration-complete")
+@app.route("/registration-complete", methods=["POST"])
 def register_complete():
-	""" """
+	"""Adds new user to database with form information"""
+	
 	pass
 
 
