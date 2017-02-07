@@ -83,7 +83,7 @@ def determine_ending_options(made_id):
 	score = DecisionMade.query.filter(DecisionMade.made_id == made_id).first()
 	if score.outcome.outcome == 1749:
 		options = ["destroy", "refusal"]
-	elif int(score.outcome.outcome) >= 2049 and int(score.outcome.outcome) <= 2799):
+	elif int(score.outcome.outcome) >= 2049 and int(score.outcome.outcome) <= 2799:
 		options = ["destroy", "control", "refusal"]
 	else:
 		options = ["destroy", "control", "synthesis", "refusal"]
@@ -93,29 +93,31 @@ def determine_ending_effects(ending_made_id, score, char_id):
 	"""For ending chosen, what to add to database/assume occured"""
 	
 	ending = DecisionMade.query.filter(DecisionMade.made_id == ending_made_id).first()
+	earth_outcome_id = Decision.query.filter(Decision.decision == "fate of Earth").first()
+	squad_outcome_id = Decision.query.filter(Decision.decision == "squad survival").first()
 	if ending.outcome.outcome == "destroy":
-		if int(score) <= 2049:
-			earth_status = DecisionMade(char_id=char_id, decision_id=24, outcome_id=71)
-			squad_status = DecisionMade(char_id=char_id, decision_id=25, outcome_id=74)
+		if int(score) <= 2049: 
+			earth_status = DecisionMade(char_id=char_id, decision_id=earth_outcome_id, outcome_id=(Outcome.query.filter(Outcome.outcome == "vaporized").first()).outcome_id)
+			squad_status = DecisionMade(char_id=char_id, decision_id=squad_outcome_id, outcome_id=(Outcome.query.filter(Outcome.outcome == "no survivors").first()).outcome_id)
 		if int(score) >= 2349 and int(score) <= 2649:
-			earth_status = DecisionMade(char_id=char_id, decision_id=24, outcome_id=72)
-			squad_status = DecisionMade(char_id=char_id, decision_id=25, outcome_id=75)
+			earth_status = DecisionMade(char_id=char_id, decision_id=earth_outcome_id, outcome_id=(Outcome.query.filter(Outcome.outcome == "devastated").first()).outcome_id)
+			squad_status = DecisionMade(char_id=char_id, decision_id=squad_outcome_id, outcome_id=(Outcome.query.filter(Outcome.outcome == "survive").first()).outcome_id)
 		if int(score) >= 2799:
-			earth_status = DecisionMade(char_id=char_id, decision_id=24, outcome_id=73)
-			squad_status = DecisionMade(char_id=char_id, decision_id=25, outcome_id=75)
+			earth_status = DecisionMade(char_id=char_id, decision_id=earth_outcome_id, outcome_id=(Outcome.query.filter(Outcome.outcome == "saved").first()).outcome_id)
+			squad_status = DecisionMade(char_id=char_id, decision_id=squad_outcome_id, outcome_id=(Outcome.query.filter(Outcome.outcome == "survive").first()).outcome_id)
 	if ending.outcome.outcome == "control":
 		if int(score) < 2649:
-			earth_status = DecisionMade(char_id=char_id, decision_id=24, outcome_id=72)
-			squad_status = DecisionMade(char_id=char_id, decision_id=25, outcome_id=75)
+			earth_status = DecisionMade(char_id=char_id, decision_id=earth_outcome_id, outcome_id=(Outcome.query.filter(Outcome.outcome == "devastated").first()).outcome_id)
+			squad_status = DecisionMade(char_id=char_id, decision_id=squad_outcome_id, outcome_id=(Outcome.query.filter(Outcome.outcome == "survive").first()).outcome_id)
 		if int(score) >= 2649:
-			earth_status = DecisionMade(char_id=char_id, decision_id=24, outcome_id=73)
-			squad_status = DecisionMade(char_id=char_id, decision_id=25, outcome_id=75)
+			earth_status = DecisionMade(char_id=char_id, decision_id=earth_outcome_id, outcome_id=(Outcome.query.filter(Outcome.outcome == "saved").first()).outcome_id)
+			squad_status = DecisionMade(char_id=char_id, decision_id=squad_outcome_id, outcome_id=(Outcome.query.filter(Outcome.outcome == "survive").first()).outcome_id)
 	if ending.outcome.outcome == "synthesis":
-		earth_status = DecisionMade(char_id=char_id, decision_id=24, outcome_id=73)
-		squad_status = DecisionMade(char_id=char_id, decision_id=25, outcome_id=76)
+		earth_status = DecisionMade(char_id=char_id, decision_id=earth_outcome_id, outcome_id=(Outcome.query.filter(Outcome.outcome == "saved").first()).outcome_id)
+		squad_status = DecisionMade(char_id=char_id, decision_id=squad_outcome_id, outcome_id=(Outcome.query.filter(Outcome.outcome == "survive synthesized").first()).outcome_id)
 	if ending.outcome.outcome == "refusal":
-		earth_status = DecisionMade(char_id=char_id, decision_id=24, outcome_id=71)
-		squad_status = DecisionMade(char_id=char_id, decision_id=25, outcome_id=74)
+		earth_status = DecisionMade(char_id=char_id, decision_id=earth_outcome_id, outcome_id=(Outcome.query.filter(Outcome.outcome == "vaporized").first()).outcome_id)
+		squad_status = DecisionMade(char_id=char_id, decision_id=squad_outcome_id, outcome_id=(Outcome.query.filter(Outcome.outcome == "no survivors").first()).outcome_id)
 	db.session.add(earth_status)
 	db.session.add(squad_status)
 	db.session.commit()
