@@ -150,13 +150,50 @@ def add_new_char():
 	"""Form with basics for adding an new character -- info that goes across all 3 games 
 	plus which games were played"""
 
-	return render_template("new_char.html")
+	if "user_id" in session:
+		return render_template("new_char.html")
+	else:
+		flash("Please log in to add a character entry")
+		return redirect("/")
 
 
 @app.route("/char-added", methods=["POST"])
 def char_added():
 	"""Adds new character to database with basic info/games played"""
 
+	if "user_id" not in session:
+		flash("Please log in to add a character entry")
+		return redirect("/")
+		
+	name = request.form.get("name")
+	gender = request.form.get("gender")
+	background = request.form.get("background")
+	psych = request.form.get("psych")
+	rep = request.form.get("reputation")
+	player_class = request.form.get("class")
+	if request.form.get("1"):
+		game1 = True
+	else:
+		game1 = False
+	if request.form.get("2"):
+		game2 = True
+	else:
+		game2 = False
+	if request.form.get("3"):
+		game3 = True
+	else:
+		game3 = False
+
+	user_id = session["user_id"]
+
+	char_id = add_character(user_id, background, 
+		psych, gender, name, rep, player_class, game1, game2, game3)
+
+	return redirect("/profile")
+
+@app.route("/profile")
+def profile():
+	""" """
 	pass
 
 
