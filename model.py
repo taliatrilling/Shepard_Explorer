@@ -152,7 +152,12 @@ def connect_to_db(app, uri="postgresql:///masseffect"):
 def make_test_data():
 	"""Instantiates a test database to be used in tests.py"""
 
-	pass
+	user1 = User(username="talia", password="password", joined_at=datetime.now())
+	character1 = Character(user_id=1, shep_background="Spacer", shep_psych_profile="War Hero", 
+		shep_gender="Female", shep_name="Talia", reputation="Paragon", player_class="Adept", played_1=True, 
+		played_2=True, played_3=True)
+	#need to address the static things in the DB? or instantiate again here?
+
 
 if __name__ == '__main__':
 	from server import app

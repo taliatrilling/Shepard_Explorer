@@ -145,6 +145,19 @@ def register_complete():
 	pass
 
 
+@app.route("/new-char")
+def add_new_char():
+	"""Form with basics for adding an new character -- info that goes across all 3 games 
+	plus which games were played"""
+
+	return render_template("new_char.html")
+
+
+@app.route("/char-added", methods=["POST"])
+def char_added():
+	"""Adds new character to database with basic info/games played"""
+
+	pass
 
 
 if __name__ == "__main__":
