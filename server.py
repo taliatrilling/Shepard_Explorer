@@ -78,7 +78,7 @@ def get_squadmate_status(char_id, squadmate_id):
 
 def determine_ending_options(made_id):
 	"""Get possible endings for given war readiness"""
-	#readiness options taken from http://www.ign.com/wikis/mass-effect-3/Endings because I only ever had max readiness...
+	#readiness stats/options taken from http://www.ign.com/wikis/mass-effect-3/Endings
 	
 	score = DecisionMade.query.filter(DecisionMade.made_id == made_id).first()
 	if score.outcome.outcome == 1749:
@@ -122,6 +122,15 @@ def determine_ending_effects(ending_made_id, score, char_id):
 	db.session.add(squad_status)
 	db.session.commit()
 
+def validate_user_creds(username, password):
+	"""For a username/password combo, checks if hashed password matches db entry"""
+	
+	identity = User.query.filter(User.username == username).first()
+	if identity:
+		if User.validate_pword(identity, password):
+			return user.user_id
+	return False
+
 #route functions
 
 @app.route("/")
@@ -135,14 +144,52 @@ def home():
 def register():
 	"""Route to register a new user"""
 	
-	pass
+	if "user_id" in session:
+		flash("Please sign out before registering a new account")
+		return redirect("/")
+	return render_template("register.html")
 
 
 @app.route("/registration-complete", methods=["POST"])
 def register_complete():
 	"""Adds new user to database with form information"""
 	
-	pass
+	username = request.form.get("username")
+	password = request.form.get("password")
+
+	user_id = add_user(username, password)
+
+	session["user_id"] = user_id
+	flash("You have been successfully registered")
+	return redirect("/")
+
+
+@app.route("/login")
+def login():
+	"""Login form for already registered users"""
+
+	if "user_id" in session:
+		flash("Please log out if you would like to log in to another account")
+		return redirect("/")
+	return render_template("login.html")
+
+
+@app.route("/logged-in")
+def logged_in():
+	"""Checks credentials and logs in user if valid"""
+
+	username = request.form.get("username")
+	password = request.form.get("password")
+
+	user_id = validate_user_creds
+
+	if user_id:
+		session["user_id"] = user_id
+		flash("You have been successfully logged in")
+		return redirect("/")
+	flash("Your username or password is incorrect, please try again")
+	return redirect("/login")
+
 
 
 @app.route("/new-char")
@@ -164,7 +211,7 @@ def char_added():
 	if "user_id" not in session:
 		flash("Please log in to add a character entry")
 		return redirect("/")
-		
+
 	name = request.form.get("name")
 	gender = request.form.get("gender")
 	background = request.form.get("background")
