@@ -257,7 +257,13 @@ def char_added():
 @app.route("/profile")
 def profile():
 	""" """
-	pass
+
+	if "user_id" not in session:
+		flash("Please log in or register to access your profile")
+		return redirect("/")
+	user_id = session["user_id"]
+	user = User.query.filter(User.user_id == user_id).first()
+	return render_template("profile.html", user=user)
 
 
 @app.route("/char-management")
