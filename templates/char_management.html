@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Character Management{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+
+{% for char in characters %}
+	{{ char.shep_name }}:<br>
+	<a href="">Update Stats</a><br>
+	<a href="">Share Character</a><br>
+	<a href="">Delete Character</a><br>
+{% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,15 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Register{% endblock %}
+{% block title %}Profile{% endblock %}
 
-{% block content %}
 <div class="container-fluid">
-	<form action="/registration-complete" method="POST">
-		<label>Username: </label><br>
-		<input type="text" name="username">
-		<label>Password: </label><br>
-		<input type="text" name="password">
-		<input type="submit">
-	</form>
+
+Manage Characters 
+<a href="/new-char">Add a New Character</a>
+
 </div>
 
 {% endblock %}

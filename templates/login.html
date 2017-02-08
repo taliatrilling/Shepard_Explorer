@@ -1,13 +1,13 @@
 {% extends "base.html" %}
-{% block title %}Register{% endblock %}
+{% block title %}Log In{% endblock %}
 
 {% block content %}
 <div class="container-fluid">
-	<form action="/registration-complete" method="POST">
+	<form action="/logged-in" method="POST">
 		<label>Username: </label><br>
-		<input type="text" name="username">
+		<input type="text" name="username"><br>
 		<label>Password: </label><br>
-		<input type="text" name="password">
+		<input type="password" name="password">
 		<input type="submit">
 	</form>
 </div>

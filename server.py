@@ -10,6 +10,8 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 import os
 
+from datetime import datetime
+
 app = Flask(__name__)
 
 app.secret_key = os.environ["SECRET_KEY"]
@@ -128,8 +130,22 @@ def validate_user_creds(username, password):
 	identity = User.query.filter(User.username == username).first()
 	if identity:
 		if User.validate_pword(identity, password):
-			return user.user_id
+			return (User.query.filter(User.username == username).first()).user_id
 	return False
+
+def get_games_played(char_id):
+	"""For a given character in the database, check which games were played to allow the route to show options
+	to update/add info"""
+
+	char_entry = Character.query.filter(Character.char_id == char_id).first()
+	games_needing_info = []
+	if char_entry.played_1: 
+		games_needing_info.append(1)
+	if char_entry.played_2: 
+		games_needing_info.append(2)
+	if char_entry.played_3: 
+		games_needing_info.append(3)
+	return games_needing_info
 
 #route functions
 
@@ -174,14 +190,14 @@ def login():
 	return render_template("login.html")
 
 
-@app.route("/logged-in")
+@app.route("/logged-in", methods=["POST"])
 def logged_in():
 	"""Checks credentials and logs in user if valid"""
 
 	username = request.form.get("username")
 	password = request.form.get("password")
 
-	user_id = validate_user_creds
+	user_id = validate_user_creds(username, password)
 
 	if user_id:
 		session["user_id"] = user_id
@@ -242,6 +258,19 @@ def char_added():
 def profile():
 	""" """
 	pass
+
+
+@app.route("/char-management")
+def char_management():
+	""" """
+
+	if "user_id" not in session:
+		flash("Please log in to manage characters")
+		return redirect("/")
+	user_id = session["user_id"]
+	characters = Character.query.filter(Character.user_id == user_id).all()
+	return render_template("char_management.html", characters=characters)
+
 
 
 if __name__ == "__main__":

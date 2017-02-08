@@ -334,6 +334,7 @@ ALTER SEQUENCE squadoutcomes_squad_outcome_id_seq OWNED BY squadoutcomes.squad_o
 CREATE TABLE users (
     user_id integer NOT NULL,
     username character varying(20) NOT NULL,
+    password character varying(80) NOT NULL,
     joined_at timestamp without time zone NOT NULL
 );
 
@@ -618,8 +619,8 @@ SELECT pg_catalog.setval('squadoutcomes_squad_outcome_id_seq', 1, false);
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: taliatrilling
 --
 
-COPY users (user_id, username, joined_at) FROM stdin;
-1	taliamax	2016-11-11 00:00:31.645845
+COPY users (user_id, username, password, joined_at) FROM stdin;
+1	taliamax	$2b$12$HduwMXQ4.TWLlyops8e7O.PFty.C9L.MfOCWbgDiAvMuUV8JdXysq	2016-11-11 00:00:31.645845
 \.
 
 
