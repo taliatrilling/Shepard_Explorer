@@ -4,11 +4,16 @@
 {% block content %}
 <div class="container-fluid">
 
+{% if characters|length == 0 %}
+	You do not have any characters currently in the system?<br>
+	Would you like to create one?
+{% endif %}
+
 {% for char in characters %}
 	Commander {{ char.shep_name }} Shepard:<br>
-	<a href="">Update Stats</a><br>
-	<a href="">Share Character</a><br>
-	<a href="">Delete Character</a><br><br>
+	<a href="/char-stats/{{ char.char_id }}">Update Stats</a><br>
+	<a href="/char/{{ char.char_id }}">Shareable Link to Character Profile</a><br>
+	<a href="/delete-char/{{ char.char_id }}">Delete Character</a><br><br>
 {% endfor %}
 
 <br><a href="/new-char">Add a New Character</a>

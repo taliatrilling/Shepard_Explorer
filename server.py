@@ -166,11 +166,18 @@ def get_games_played(char_id):
 		games_needing_info.append(3)
 	return games_needing_info
 
-def delete_char(char_id, user_id):
-	"""If a user has ownership, deletes a character from the db"""
+def check_char_ownership(char_id, user_id):
+	"""Checks a certain user has ownership of a character"""
 
 	char = Character.query.filter(Character.char_id == char_id).first()
 	if char.user_id != user_id:
+		return False
+	return True
+
+def delete_char(char_id, user_id):
+	"""If a user has ownership, deletes a character from the db"""
+
+	if not check_char_ownership(char_id, user_id):
 		return False
 	char.delete()
 	db.session.commit()
@@ -328,6 +335,45 @@ def char_management():
 	characters = Character.query.filter(Character.user_id == user_id).all()
 	return render_template("char_management.html", characters=characters)
 
+
+@app.route("/delete-char/<int:char_id>")
+def delete_char_route(char_id):
+	"""Checks if user has access, and if does, shows option to delete a character"""
+
+	if "user_id" not in session:
+		flash("Please log in to delete a character")
+		return redirect("/")
+	user_id = session["user_id"]
+	if not check_char_ownership(char_id,user_id):
+		flash("You do not have access to that character for deletion purposes")
+		return redirect("/")
+	return render_template("delete_char.html")
+
+
+@app.route("/delete-char-result")
+def delete_char_result():
+	"""Actually deletes a character from the db after permissions confirmed and user has initiated"""
+
+	if delete_char(char_id, user_id):
+		flash("Your character was successfully deleted from the database.")
+		return redirect("/char-management")
+	flash("You do not have access to that character for deletion purposes")
+	return redirect("/")
+
+
+@app.route("/char-stats/<int:char_id>")
+def char_stats(char_id):
+	"""Displays existing stats for a character as well as options to update/add"""
+
+	pass
+
+
+@app.route("/char/<int:char_id>")
+def display_char(char_id):
+	"""Shows info associated with a character without the option to change stats -- used to share character
+	with friends or other users"""
+
+	pass
 
 
 if __name__ == "__main__":
