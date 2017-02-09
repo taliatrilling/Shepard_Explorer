@@ -5,11 +5,13 @@
 <div class="container-fluid">
 
 {% for char in characters %}
-	{{ char.shep_name }}:<br>
+	Commander {{ char.shep_name }} Shepard:<br>
 	<a href="">Update Stats</a><br>
 	<a href="">Share Character</a><br>
-	<a href="">Delete Character</a><br>
+	<a href="">Delete Character</a><br><br>
 {% endfor %}
+
+<br><a href="/new-char">Add a New Character</a>
 
 </div>
 

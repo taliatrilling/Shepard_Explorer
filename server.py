@@ -207,6 +207,14 @@ def logged_in():
 	return redirect("/login")
 
 
+@app.route("/logout")
+def log_out():
+	"""Logs a current user out by deleting the session key/value"""
+
+	del session["user_id"]
+	flash("You have been logged out")
+	return redirect("/")
+
 
 @app.route("/new-char")
 def add_new_char():
@@ -256,7 +264,7 @@ def char_added():
 
 @app.route("/profile")
 def profile():
-	""" """
+	"""Displays current user's profile"""
 
 	if "user_id" not in session:
 		flash("Please log in or register to access your profile")
@@ -268,7 +276,8 @@ def profile():
 
 @app.route("/char-management")
 def char_management():
-	""" """
+	"""Displays existing characters for a user, options to add a new character, update a character, or delete 
+	a character"""
 
 	if "user_id" not in session:
 		flash("Please log in to manage characters")
