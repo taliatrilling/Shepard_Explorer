@@ -42,15 +42,34 @@ def add_character(user_id, background, profile, gender, name, reputation, pclass
 	db.session.commit()
 	return character.char_id
 
+def check_outcome_valid_for_decision(outcome_id, decision_id):
+	"""Check that an outcome being entered is a valid entry for the decision -- 
+	function not to be used by user but by system to reduce errors"""
 
-def add_outcome(user_id, char_id, decision, outcome):
+	outcomes = (Outcome.query.filter(Outcome.outcome_id == outcome_id).all()).decision_id
+	if decision_id not in outcomes:
+		return False
+	return True
+
+
+def add_outcome(user_id, char_id, decision_id, outcome_id):
 	"""Add specific outcome associated with a decision for a specific character to the database, returns the
 	generated object's id"""
 
-	dm = DecisionMade(char_id=char_id, decision_id=decision, outcome_id=outcome)
+	dm = DecisionMade(char_id=char_id, decision_id=decision_id, outcome_id=outcome_id)
 	db.session.add(dm)
 	db.session.commit()
 	return dm.made_id
+
+def get_id_for_outcome(outcome):
+	"""Get db id for outcome"""
+
+	return (Outcome.query.filter(Outcome.outcome == outcome).first()).outcome_id
+
+def get_id_for_decision(decision):
+	"""Get db id for decision"""
+
+	return (Decision.query.filter(Decision.decision_id == decision_id).first()).decision_id
 
 def add_squadmate_status(char_id, squadmate_id, status_code):
 	"""Add a specific squadmate status for a specific character"""
@@ -146,6 +165,29 @@ def get_games_played(char_id):
 	if char_entry.played_3: 
 		games_needing_info.append(3)
 	return games_needing_info
+
+def delete_char(char_id, user_id):
+	"""If a user has ownership, deletes a character from the db"""
+
+	char = Character.query.filter(Character.char_id == char_id).first()
+	if char.user_id != user_id:
+		return False
+	char.delete()
+	db.session.commit()
+	return True
+
+def get_all_open_decisions_for_game(char_id, relevant_game_num):
+	"""For a given character and game, get all decisions that still need to be made"""
+
+	all_decisions = Decision.query.filter(Decision.associated_game == relevant_game_num).all()
+	decisions_already_made = DecisionMade.query.filter(DecisionMade.char_id == char_id).all()
+	open_decisions = []
+	for decision in all_decisions:
+		if decision.decision_id not in decisions_already_made:
+			open_decisions.append(decision.decision_id)
+	return open_decisions
+
+
 
 #route functions
 
