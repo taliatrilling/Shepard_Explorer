@@ -606,6 +606,82 @@ SELECT pg_catalog.setval('decisionsmade_made_id_seq', 2, true);
 --
 
 COPY outcomedescriptions (description_id, text, outcome_id) FROM stdin;
+3	You saved Kaidan on Virmire	1
+4	You saved Ashley on Virmire	2
+5	You spared the Rachni Queen	3
+6	You killed the Rachni Queen	4
+7	You saved the Council	5
+8	You let the council die	6
+9	Wrex survived Virmire	7
+10	Wrex died on Virmire	8
+11	You spared Shiala	9
+12	You killed Shiala	10
+13	You romanced Ashley	11
+14	You romanced Liara	12
+15	You romanced Kaidan	13
+16	You romanced Jack	15
+17	You romanced Miranda	16
+18	You romanced Tali	17
+19	You romanced Jacob	18
+20	You romanced Garrus	19
+21	You romanced Thane	20
+22	You didn"t romance anyone, choosing to be alone	14
+23	You didn"t romance anyone, choosing to be alone	21
+26	Only Chakwas survived the collector attack on the crew	24
+27	Half of the crew survived the collector attack	25
+28	All of the auxiliary crew survived the collector attack	26
+29	A loyal squadmate escorted the remaining auxiliary crew back to the Normandy	27
+30	A non-loyal squadmate escorted the remaining auxiliary crew back to the Normandy	28
+31	The remaining auxiliary crew had no escort back to the Normandy	29
+32	You allowed Mordin to save Maelon"s genophage research	22
+33	You forced Mordin to destroy Maelon"s genophage research	23
+34	The collector base was destroyed	30
+35	The collector base was saved	31
+36	The suicide mission was a success	32
+37	The suicide mission was a failure, and Shepard died	33
+38	You romanced Miranda	34
+39	You romanced Tali	35
+40	You romanced Jack	36
+41	You romanced Ashley	37
+42	You romanced Steve	38
+43	You romanced Samantha	39
+44	You romanced Garrus	40
+45	You romanced Kaidan	41
+46	You romanced Liara	42
+47	You saved Grissom Academy	43
+48	You ignored Grissom Academy"s distress call	44
+49	You saved the Arlakh Company	45
+50	You sacrificed the Arlakh Company to save the Rachni Queen	46
+51	You convinced Kelly to change her identity, which protected her from the Cerberus attack	47
+52	You didn"t convince Kelly to change her identity, and she was killed by Cerberus when they attacked the Citadel	48
+53	You didn"t encounter Kelly on the Citadel, and her fate is unknown	49
+54	You stopped Samara from killing herself, and convinced her to join the war effort	50
+55	You let Samara kill herself after the events at the Monastery	51
+56	You did not encounter Samara	52
+57	You sabotaged the cure for the genophage, which bought you the support of the Salarians	53
+58	You completed the cure for the genophage, losing the Salarian"s support but giving the Krogans a chance for the future	54
+59	You brokered peace between the Quarians and the Geth	55
+60	You sided with the Quarians, dooming the Geth to die	56
+61	You sided with the Geth, dooming the Quarians to die	57
+62	You convinced the Illusive Man that he was wrong, leading him to kill himself	58
+63	The Illusive Man was unconvinced, and you were forced to kill him	59
+64	Your war readiness score was between 0 and 1749	60
+65	Your war readiness score was between 1750 and 2049	61
+66	Your war readiness score was between 2050 and 2349	62
+67	Your war readiness score was between 2350 and 2649	63
+68	Your war readiness score was between 2650 and 2799	64
+69	Your war readiness score was between 2800 and 3999	65
+70	Your war readiness score was 4000 or above	66
+71	You chose the "destroy" solution	67
+72	You chose the "control" solution	68
+73	You chose the "synthesis" solution	69
+74	You chose to refuse the Catalyst"s options	70
+75	Earth was vaporized	71
+76	Earth was devastated but not fully destroyed	72
+77	Earth was saved	73
+78	Your squadmates did not survive the final attack	74
+79	Your squadmates survived the final attack	75
+80	Your squadmates survived the final attack, and were synthesized with synthetic lifeforms	76
 \.
 
 
@@ -613,7 +689,7 @@ COPY outcomedescriptions (description_id, text, outcome_id) FROM stdin;
 -- Name: outcomedescriptions_description_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taliatrilling
 --
 
-SELECT pg_catalog.setval('outcomedescriptions_description_id_seq', 1, false);
+SELECT pg_catalog.setval('outcomedescriptions_description_id_seq', 80, true);
 
 
 --

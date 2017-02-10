@@ -195,14 +195,14 @@ def get_all_open_decisions_for_game(char_id, relevant_game_num):
 	return open_decisions
 
 def get_decision_description(decision_id):
-	""" """
-	pass
+	"""For a decision, get its description"""
+	
+	return ((DecisionDescription.query.filter(DecisionDescription.decision_id == decision_id).first()).text)
 
 def get_outcome_description(outcome_id):
-	""" """
-	pass
-
-
+	"""For an outcome, get its description"""
+	
+	return ((OutcomeDescription.query.filter(OutcomeDescription.outcome_id == outcome_id).first()).text)
 
 #route functions
 
