@@ -142,6 +142,40 @@ class SquadOutcome(db.Model):
 
 		return ("<SquadOutcome char_id=%s squadmate_id=%s>" % (self.char_id, self.squadmate_id))
 
+class DecisionDescription(db.Model):
+	"""Text associated with decision descriptions"""
+
+	__tablename__ = "decisiondescriptions" 
+
+	description_id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
+	text = db.Column(db.String(500), nullable=False)
+	decision_id = db.Column(db.Integer, db.ForeignKey("decisions.decision_id"), nullable=False)
+
+	decision = db.relationship("Decision", backref="decisiondescriptions")
+
+	def __repr__(self):
+		"""Provides helpful information on an instance when printed"""
+
+		return ("<DecisionDescription description_id=%s decision_id=%s text=%s>" % (self.description_id, 
+			self.decision_id, self.text))
+
+class OutcomeDescription(db.Model):
+	"""Text associated with outcome descriptions"""
+
+	__tablename__ = "outcomedescriptions"
+
+	description_id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
+	text = db.Column(db.String(500), nullable=False)
+	outcome_id = db.Column(db.Integer, db.ForeignKey("outcomes.outcome_id"), nullable=False)
+
+	outcome = db.relationship("Outcome", backref="outcomedescriptions")
+
+	def __repr__(self):
+		"""Provides helpful information on an instance when printed"""
+
+		return ("<OutcomeDescription description_id=%s outcome_id=%s text=%s>" % (self.description_id, 
+			self.outcome_id, self.text))
+
 def connect_to_db(app, uri="postgresql:///masseffect"):
 	""" """
 

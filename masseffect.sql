@@ -157,6 +157,40 @@ ALTER SEQUENCE characters_char_id_seq OWNED BY characters.char_id;
 
 
 --
+-- Name: decisiondescriptions; Type: TABLE; Schema: public; Owner: taliatrilling
+--
+
+CREATE TABLE decisiondescriptions (
+    description_id integer NOT NULL,
+    text character varying(500) NOT NULL,
+    decision_id integer NOT NULL
+);
+
+
+ALTER TABLE decisiondescriptions OWNER TO taliatrilling;
+
+--
+-- Name: decisiondescriptions_description_id_seq; Type: SEQUENCE; Schema: public; Owner: taliatrilling
+--
+
+CREATE SEQUENCE decisiondescriptions_description_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE decisiondescriptions_description_id_seq OWNER TO taliatrilling;
+
+--
+-- Name: decisiondescriptions_description_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: taliatrilling
+--
+
+ALTER SEQUENCE decisiondescriptions_description_id_seq OWNED BY decisiondescriptions.description_id;
+
+
+--
 -- Name: decisions; Type: TABLE; Schema: public; Owner: taliatrilling
 --
 
@@ -223,6 +257,40 @@ ALTER TABLE decisionsmade_made_id_seq OWNER TO taliatrilling;
 --
 
 ALTER SEQUENCE decisionsmade_made_id_seq OWNED BY decisionsmade.made_id;
+
+
+--
+-- Name: outcomedescriptions; Type: TABLE; Schema: public; Owner: taliatrilling
+--
+
+CREATE TABLE outcomedescriptions (
+    description_id integer NOT NULL,
+    text character varying(500) NOT NULL,
+    outcome_id integer NOT NULL
+);
+
+
+ALTER TABLE outcomedescriptions OWNER TO taliatrilling;
+
+--
+-- Name: outcomedescriptions_description_id_seq; Type: SEQUENCE; Schema: public; Owner: taliatrilling
+--
+
+CREATE SEQUENCE outcomedescriptions_description_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE outcomedescriptions_description_id_seq OWNER TO taliatrilling;
+
+--
+-- Name: outcomedescriptions_description_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: taliatrilling
+--
+
+ALTER SEQUENCE outcomedescriptions_description_id_seq OWNED BY outcomedescriptions.description_id;
 
 
 --
@@ -370,6 +438,13 @@ ALTER TABLE ONLY characters ALTER COLUMN char_id SET DEFAULT nextval('characters
 
 
 --
+-- Name: decisiondescriptions description_id; Type: DEFAULT; Schema: public; Owner: taliatrilling
+--
+
+ALTER TABLE ONLY decisiondescriptions ALTER COLUMN description_id SET DEFAULT nextval('decisiondescriptions_description_id_seq'::regclass);
+
+
+--
 -- Name: decisions decision_id; Type: DEFAULT; Schema: public; Owner: taliatrilling
 --
 
@@ -381,6 +456,13 @@ ALTER TABLE ONLY decisions ALTER COLUMN decision_id SET DEFAULT nextval('decisio
 --
 
 ALTER TABLE ONLY decisionsmade ALTER COLUMN made_id SET DEFAULT nextval('decisionsmade_made_id_seq'::regclass);
+
+
+--
+-- Name: outcomedescriptions description_id; Type: DEFAULT; Schema: public; Owner: taliatrilling
+--
+
+ALTER TABLE ONLY outcomedescriptions ALTER COLUMN description_id SET DEFAULT nextval('outcomedescriptions_description_id_seq'::regclass);
 
 
 --
@@ -425,6 +507,44 @@ COPY characters (char_id, user_id, shep_background, shep_psych_profile, shep_gen
 --
 
 SELECT pg_catalog.setval('characters_char_id_seq', 1, true);
+
+
+--
+-- Data for Name: decisiondescriptions; Type: TABLE DATA; Schema: public; Owner: taliatrilling
+--
+
+COPY decisiondescriptions (description_id, text, decision_id) FROM stdin;
+1	Which squadmate did you save on Virmire? The hunky sentinel or the spunky soldier?	1
+2	Did you free the Rachni Queen on Noveria or did you kill her, allowing the Rachni to remain extinct (for the time being)?	2
+3	Did the council survive the attack on the Citadel, or did you choose to not send reinforcements to the Ascension, allowing them to die?	3
+4	Were you able to convince Wrex to allow you to destroy the base on Virmire, or were you forced to kill him?	4
+5	Did Shiala survive her encounter with Shepard and the Thorian, or did you kill her for her role in helping Saren?	5
+6	Did you choose to woo a squadmate, and if so, who was it?	6
+7	Who won your newly-reconstructed heart?	7
+8	Did you allow Mordin to save Maelon"s research on the genophage?	8
+9	Did your auxiliary crew survive the collector attack, or were they turned into human goo?	9
+10	Did you send a squadmate to escort the auxiliary crew back to the Normandy, and if so, were they loyal?	10
+11	Did you destroy the collector base, or did you let the Illusive Man talk you into saving it for, uh, whatever weird explanation he gave?	11
+12	Was the suicide mission a success, or did Shepard perish in a fiery chasm?	12
+13	Who did you choose to cuddle with in the face of humanity"s extinction?	13
+14	Did you save Arlakh Company or the Rachni Queen?	15
+15	Did Kelly survive Cerberus"s attack on the Citadel?	17
+16	Did Samara kill herself, or did you convince her to live and join the war effort?	18
+17	Was the genophage ended, or did you sabotage the cure?	19
+18	What was the outcome of the Geth-Quarian war?	20
+19	Were you able to convince the Illusive Man to see the error of his ways?	21
+20	What was your final war readiness?	22
+21	What was the final outcome of Shepard"s discussion with the Catalyst?	23
+22	What was the final fate of Earth?	24
+23	Did your squad survive the events with the Catalyst?	25
+\.
+
+
+--
+-- Name: decisiondescriptions_description_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taliatrilling
+--
+
+SELECT pg_catalog.setval('decisiondescriptions_description_id_seq', 23, true);
 
 
 --
@@ -479,6 +599,21 @@ COPY decisionsmade (made_id, char_id, decision_id, outcome_id) FROM stdin;
 --
 
 SELECT pg_catalog.setval('decisionsmade_made_id_seq', 2, true);
+
+
+--
+-- Data for Name: outcomedescriptions; Type: TABLE DATA; Schema: public; Owner: taliatrilling
+--
+
+COPY outcomedescriptions (description_id, text, outcome_id) FROM stdin;
+\.
+
+
+--
+-- Name: outcomedescriptions_description_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taliatrilling
+--
+
+SELECT pg_catalog.setval('outcomedescriptions_description_id_seq', 1, false);
 
 
 --
@@ -640,6 +775,14 @@ ALTER TABLE ONLY characters
 
 
 --
+-- Name: decisiondescriptions decisiondescriptions_pkey; Type: CONSTRAINT; Schema: public; Owner: taliatrilling
+--
+
+ALTER TABLE ONLY decisiondescriptions
+    ADD CONSTRAINT decisiondescriptions_pkey PRIMARY KEY (description_id);
+
+
+--
 -- Name: decisions decisions_decision_key; Type: CONSTRAINT; Schema: public; Owner: taliatrilling
 --
 
@@ -661,6 +804,14 @@ ALTER TABLE ONLY decisions
 
 ALTER TABLE ONLY decisionsmade
     ADD CONSTRAINT decisionsmade_pkey PRIMARY KEY (made_id);
+
+
+--
+-- Name: outcomedescriptions outcomedescriptions_pkey; Type: CONSTRAINT; Schema: public; Owner: taliatrilling
+--
+
+ALTER TABLE ONLY outcomedescriptions
+    ADD CONSTRAINT outcomedescriptions_pkey PRIMARY KEY (description_id);
 
 
 --
@@ -720,6 +871,14 @@ ALTER TABLE ONLY characters
 
 
 --
+-- Name: decisiondescriptions decisiondescriptions_decision_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: taliatrilling
+--
+
+ALTER TABLE ONLY decisiondescriptions
+    ADD CONSTRAINT decisiondescriptions_decision_id_fkey FOREIGN KEY (decision_id) REFERENCES decisions(decision_id);
+
+
+--
 -- Name: decisionsmade decisionsmade_char_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: taliatrilling
 --
 
@@ -733,6 +892,14 @@ ALTER TABLE ONLY decisionsmade
 
 ALTER TABLE ONLY decisionsmade
     ADD CONSTRAINT decisionsmade_decision_id_fkey FOREIGN KEY (decision_id) REFERENCES decisions(decision_id);
+
+
+--
+-- Name: outcomedescriptions outcomedescriptions_outcome_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: taliatrilling
+--
+
+ALTER TABLE ONLY outcomedescriptions
+    ADD CONSTRAINT outcomedescriptions_outcome_id_fkey FOREIGN KEY (outcome_id) REFERENCES outcomes(outcome_id);
 
 
 --

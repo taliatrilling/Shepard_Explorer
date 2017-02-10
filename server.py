@@ -194,6 +194,14 @@ def get_all_open_decisions_for_game(char_id, relevant_game_num):
 			open_decisions.append(decision.decision_id)
 	return open_decisions
 
+def get_decision_description(decision_id):
+	""" """
+	pass
+
+def get_outcome_description(outcome_id):
+	""" """
+	pass
+
 
 
 #route functions
@@ -373,7 +381,9 @@ def display_char(char_id):
 	"""Shows info associated with a character without the option to change stats -- used to share character
 	with friends or other users"""
 
-	pass
+	char_info = Character.query.filter(Character.char_id == char_id).all()
+	decisions = DecisionMade.query.filter(DecisionMade.char_id == char_id).all()
+	return render_template("char.html", info=info, decisions=decisions)
 
 
 if __name__ == "__main__":
