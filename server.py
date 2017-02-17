@@ -293,12 +293,12 @@ def char_added():
 		flash("Please log in to add a character entry")
 		return redirect("/")
 
-	name = request.form.get("name")
+	name = request.form.get("shep_name")
 	gender = request.form.get("gender")
 	background = request.form.get("background")
 	psych = request.form.get("psych")
 	rep = request.form.get("reputation")
-	player_class = request.form.get("class")
+	player_class = request.form.get("player_class")
 	if request.form.get("1"):
 		game1 = True
 	else:
@@ -383,7 +383,7 @@ def display_char(char_id):
 
 	char_info = Character.query.filter(Character.char_id == char_id).all()
 	decisions = DecisionMade.query.filter(DecisionMade.char_id == char_id).all()
-	return render_template("char.html", info=info, decisions=decisions)
+	return render_template("char.html", info=char_info, decisions=decisions)
 
 
 if __name__ == "__main__":

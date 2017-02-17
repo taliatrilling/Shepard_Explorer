@@ -7,7 +7,7 @@
 	<h1>Add a new Shepard profile</h1>
 	<form action="/char-added" method="POST">
 		<label>Character name:</label>
-		<input type="text" name="name"><br><br>		
+		<input type="text" name="shep_name"><br><br>		
 		<!-- need AJAX warning if too long + something that updates to say, ok ___ Shepard -->
 		<label>What was your Shepard's gender identity?</label><br>
 		<input type="radio" name="gender" value="Female"> Female <br>
@@ -18,20 +18,20 @@
 		<input type="radio" name="background" value="Colonist"> Colonist <br>
 		<input type="radio" name="background" value="Earthborn"> Earthborn <br>
 		<label>What was your Shepard's psychological profile?</label><br>
-		<input type="radio" name="psych" value="SoleSurvivor"> Sole Survivor <br>
-		<input type="radio" name="psych" value="WarHero"> War Hero <br>
+		<input type="radio" name="psych" value="Sole Survivor"> Sole Survivor <br>
+		<input type="radio" name="psych" value="War Hero"> War Hero <br>
 		<input type="radio" name="psych" value="Ruthless"> Ruthless <br>
 		<label>What was your Shepard's reputation?</label><br>
 		<input type="radio" name="reputation" value="Paragon"> Paragon <br>
 		<input type="radio" name="reputation" value="Renegade"> Renegade <br>
 		<input type="radio" name="reputation" value="Paragade"> Paragade <br>
 		<label>What was your Shepard's combat class?</label><br>
-		<input type="radio" name="class" value="Adept"> Adept <br>
-		<input type="radio" name="class" value="Sentinel"> Sentinel <br>
-		<input type="radio" name="class" value="Vanguard"> Vanguard <br>
-		<input type="radio" name="class" value="Soldier"> Soldier <br>
-		<input type="radio" name="class" value="Infiltrator"> Infiltrator <br>
-		<input type="radio" name="class" value="Engineer"> Engineer <br>
+		<input type="radio" name="player_class" value="Adept"> Adept <br>
+		<input type="radio" name="player_class" value="Sentinel"> Sentinel <br>
+		<input type="radio" name="player_class" value="Vanguard"> Vanguard <br>
+		<input type="radio" name="player_class" value="Soldier"> Soldier <br>
+		<input type="radio" name="player_class" value="Infiltrator"> Infiltrator <br>
+		<input type="radio" name="player_class" value="Engineer"> Engineer <br>
 		<label>Finally, which games did you complete with this character?</label><br>
 		<input type="checkbox" name="1" value="1"> Mass Effect <br>
 		<input type="checkbox" name="2" value="2"> Mass Effect 2 <br>
