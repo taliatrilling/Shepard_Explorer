@@ -205,6 +205,25 @@ def get_outcome_description(outcome_id):
 	
 	return ((OutcomeDescription.query.filter(OutcomeDescription.outcome_id == outcome_id).first()).text)
 
+def get_decision_summary_dict(char_id, game_num):
+	"""For a given character and game, get the decisions, outcomes and related descriptions for displaying
+	a character summary"""
+
+	char_info = Character.query.filter(Character.char_id == char_id).all()
+	eligible_decisions_obj = Decision.query.filter(Decision.associated_game == game_num).all()
+	eligible = [decision.decision_id for decision in eligible_decisions_obj]
+	decisions = DecisionMade.query.filter(DecisionMade.char_id == char_id, 
+		DecisionMade.decision_id.in_(eligible)).all()
+	summaries = {}
+	for decision in decisions:
+		for_summaries[decision_id] = decision.decision_id
+		for_summaries[outcome_id] = decision.outcome_id
+		for_summaries[decision_desc] = get_decision_description(decision.decision_id)
+		for_summaries[outcome_desc] = get_outcome_description(decision.outcome_id)
+		for_summaries[relevant_game_num] = decision.decision.associated_game
+		summaries[decision.decision.decision] = for_summaries
+	return summaries
+
 #route functions
 
 @app.route("/")
@@ -388,9 +407,21 @@ def display_char(char_id):
 	"""Shows info associated with a character without the option to change stats -- used to share character
 	with friends or other users"""
 
-	char_info = Character.query.filter(Character.char_id == char_id).all()
-	decisions = DecisionMade.query.filter(DecisionMade.char_id == char_id).all()
-	return render_template("char.html", info=char_info, decisions=decisions)
+	char = Character.query.filter(Character.char_id == char_id).first()
+	if char.played_1:
+		one = get_decision_summary_dict(char_id, 1)
+	else:
+		one = None
+	if char.played_2:
+		two = get_decision_summary_dict(char_id, 2)
+	else:
+		two = None
+	if char.played_3:
+		three = get_decision_summary_dict(char_id, 3)
+	else:
+		three = None
+
+	return render_template("char.html", char=char, one=one, two=two, three=three)
 
 
 if __name__ == "__main__":

@@ -151,7 +151,7 @@ class DecisionDescription(db.Model):
 	text = db.Column(db.String(500), nullable=False)
 	decision_id = db.Column(db.Integer, db.ForeignKey("decisions.decision_id"), nullable=False)
 
-	decision = db.relationship("Decision", backref="decisiondescriptions")
+	decision = db.relationship("Decision", backref="decisiondescription")
 
 	def __repr__(self):
 		"""Provides helpful information on an instance when printed"""
@@ -168,7 +168,7 @@ class OutcomeDescription(db.Model):
 	text = db.Column(db.String(500), nullable=False)
 	outcome_id = db.Column(db.Integer, db.ForeignKey("outcomes.outcome_id"), nullable=False)
 
-	outcome = db.relationship("Outcome", backref="outcomedescriptions")
+	outcome = db.relationship("Outcome", backref="outcomedescription")
 
 	def __repr__(self):
 		"""Provides helpful information on an instance when printed"""
