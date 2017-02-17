@@ -179,7 +179,8 @@ def delete_char(char_id, user_id):
 
 	if not check_char_ownership(char_id, user_id):
 		return False
-	char.delete()
+	char = char = Character.query.filter(Character.char_id == char_id).first()
+	db.session.delete(char)
 	db.session.commit()
 	return True
 
@@ -355,13 +356,19 @@ def delete_char_route(char_id):
 	if not check_char_ownership(char_id,user_id):
 		flash("You do not have access to that character for deletion purposes")
 		return redirect("/")
-	return render_template("delete_char.html")
+	char = Character.query.filter(Character.char_id == char_id).first()
+	return render_template("delete_char.html", char=char)
 
 
-@app.route("/delete-char-result")
+@app.route("/delete-char-result", methods=["POST"])
 def delete_char_result():
 	"""Actually deletes a character from the db after permissions confirmed and user has initiated"""
 
+	if "user_id" not in session:
+		flash("Please log in to delete a character")
+		return redirect("/")
+	user_id = session["user_id"]
+	char_id = request.form.get("char_id")
 	if delete_char(char_id, user_id):
 		flash("Your character was successfully deleted from the database.")
 		return redirect("/char-management")

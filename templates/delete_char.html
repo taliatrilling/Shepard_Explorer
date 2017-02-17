@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Delete a Character{% endblock %}
+
+{% block content %}
+
+Are you sure you want to delete {{ char.shep_name }}?
+
+<form action="/delete-char-result" method="POST">
+	<input type="hidden" name="char_id" value="{{ char.char_id }}" readonly>
+	<input type="submit" value="Yes, I'm sure">
+</form>
+<form action="/" method="GET">
+	<input type="submit" value="No, please take me back to safety!">
+</form>
+
+
+{% endblock %}
