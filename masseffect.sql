@@ -514,6 +514,30 @@ SELECT pg_catalog.setval('characters_char_id_seq', 4, true);
 --
 
 COPY decisiondescriptions (description_id, text, decision_id) FROM stdin;
+1	Which squadmate did you save on Virmire? The hunky sentinel or the spunky soldier?	1
+2	Did you free the Rachni Queen on Noveria or did you kill her, allowing the Rachni to remain extinct (for the time being)?	2
+3	Did the council survive the attack on the Citadel, or did you choose to not send reinforcements to the Ascension, causing them to die?	3
+4	Were you able to convince Wrex to allow you to destroy the base on Virmire, or were you forced to kill him?	4
+5	Did Shiala survive her encounter with Shepard and the Thorian, or did you kill her for her role in helping Saren?	5
+6	Did you decide to seek solace from Saren via a romantic partner?	6
+7	Did you choose to woo a squadmate, and if so, who was it?	7
+8	Did you allow Mordin to save Maelon"s research on the genophage?	8
+9	Did your auxiliary crew survive the collector attack, or were they turned into human goo?	9
+10	Did you send a squadmate to escort the auxiliary crew back to the Normandy, and if so, were they loyal?	10
+11	Did you destroy the collector base, or did you let the Illusive Man talk you into saving it for, uh, whatever weird explanation he gave?	11
+12	Was the suicide mission a success, or did Shepard perish in a fiery chasm?	12
+13	Who did you choose to cuddle with in the face of humanity"s extinction?	13
+14	Did you answer Grissom Academy"s call for help?	14
+15	Did you save Arlakh Company or the Rachni Queen?	15
+16	Did Kelly survive Cerberus"s attack on the Citadel?	16
+17	Did Samara kill herself, or did you convince her to live and join the war effort?	17
+18	Was the genophage ended, or did you sabotage the cure?	18
+19	What was the outcome of the Geth-Quarian war?	19
+20	Were you able to convince the Illusive Man to see the error of his ways?	20
+21	What was your final war readiness?	21
+22	What was the final outcome of Shepard"s encounter with the Catalyst?  	22
+23	What was the final fate of Earth?	23
+24	Did your squad survive the events with the Catalyst?	24
 \.
 
 
@@ -521,7 +545,7 @@ COPY decisiondescriptions (description_id, text, decision_id) FROM stdin;
 -- Name: decisiondescriptions_description_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taliatrilling
 --
 
-SELECT pg_catalog.setval('decisiondescriptions_description_id_seq', 23, true);
+SELECT pg_catalog.setval('decisiondescriptions_description_id_seq', 25, true);
 
 
 --
@@ -544,15 +568,15 @@ COPY decisions (decision_id, decision, associated_game) FROM stdin;
 13	romanced3	3
 14	grissom academy	3
 15	krogan team	3
-17	Kelly	3
-18	Samara	3
-19	genophage cure	3
-20	geth quarians	3
-21	illusive man	3
-22	war readiness	3
-23	final outcome	3
-24	fate of Earth	3
-25	squad survival	3
+16	Kelly	3
+17	Samara	3
+18	genophage cure	3
+19	geth quarians	3
+20	illusive man	3
+21	war readiness	3
+22	final outcome	3
+23	fate of Earth	3
+24	squad survival	3
 \.
 
 
@@ -736,36 +760,36 @@ COPY outcomes (outcome_id, decision_id, outcome) FROM stdin;
 44	14	ignored
 45	15	saved
 46	15	sacrificed
-47	17	saved
-48	17	dead
-49	17	unknown
-50	18	stopped suicide
-51	18	let suicide occur
-52	18	samara not seen
-53	19	cure sabotaged
-54	19	cure completed
-55	20	peace brokered
-56	20	quarians only
-57	20	geth only
-58	21	convinced
-59	21	unconvinced
-60	22	1749
-61	22	2049
-62	22	2349
-63	22	2649
-64	22	2799
-65	22	3999
-66	22	4000
-67	23	destroy
-68	23	control
-69	23	synthesis
-70	23	refusal
-71	24	vaporized
-72	24	devastated
-73	24	saved
-74	25	no survivors
-75	25	survive
-76	25	survive synthesized
+47	16	saved
+48	16	dead
+49	16	unknown
+50	17	stopped suicide
+51	17	let suicide occur
+52	17	samara not seen
+53	18	cure sabotaged
+54	18	cure completed
+55	19	peace brokered
+56	19	quarians only
+57	19	geth only
+58	20	convinced
+59	20	unconvinced
+60	21	1749
+61	21	2049
+62	21	2349
+63	21	2649
+64	21	2799
+65	21	3999
+66	21	4000
+67	22	destroy
+68	22	control
+69	22	synthesis
+70	22	refusal
+71	23	vaporized
+72	23	devastated
+73	23	saved
+74	24	no survivors
+75	24	survive
+76	24	survive synthesized
 \.
 
 
