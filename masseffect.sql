@@ -506,7 +506,7 @@ COPY characters (char_id, user_id, shep_background, shep_psych_profile, shep_gen
 -- Name: characters_char_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taliatrilling
 --
 
-SELECT pg_catalog.setval('characters_char_id_seq', 1, true);
+SELECT pg_catalog.setval('characters_char_id_seq', 4, true);
 
 
 --
@@ -514,29 +514,6 @@ SELECT pg_catalog.setval('characters_char_id_seq', 1, true);
 --
 
 COPY decisiondescriptions (description_id, text, decision_id) FROM stdin;
-1	Which squadmate did you save on Virmire? The hunky sentinel or the spunky soldier?	1
-2	Did you free the Rachni Queen on Noveria or did you kill her, allowing the Rachni to remain extinct (for the time being)?	2
-3	Did the council survive the attack on the Citadel, or did you choose to not send reinforcements to the Ascension, allowing them to die?	3
-4	Were you able to convince Wrex to allow you to destroy the base on Virmire, or were you forced to kill him?	4
-5	Did Shiala survive her encounter with Shepard and the Thorian, or did you kill her for her role in helping Saren?	5
-6	Did you choose to woo a squadmate, and if so, who was it?	6
-7	Who won your newly-reconstructed heart?	7
-8	Did you allow Mordin to save Maelon"s research on the genophage?	8
-9	Did your auxiliary crew survive the collector attack, or were they turned into human goo?	9
-10	Did you send a squadmate to escort the auxiliary crew back to the Normandy, and if so, were they loyal?	10
-11	Did you destroy the collector base, or did you let the Illusive Man talk you into saving it for, uh, whatever weird explanation he gave?	11
-12	Was the suicide mission a success, or did Shepard perish in a fiery chasm?	12
-13	Who did you choose to cuddle with in the face of humanity"s extinction?	13
-14	Did you save Arlakh Company or the Rachni Queen?	15
-15	Did Kelly survive Cerberus"s attack on the Citadel?	17
-16	Did Samara kill herself, or did you convince her to live and join the war effort?	18
-17	Was the genophage ended, or did you sabotage the cure?	19
-18	What was the outcome of the Geth-Quarian war?	20
-19	Were you able to convince the Illusive Man to see the error of his ways?	21
-20	What was your final war readiness?	22
-21	What was the final outcome of Shepard"s discussion with the Catalyst?	23
-22	What was the final fate of Earth?	24
-23	Did your squad survive the events with the Catalyst?	25
 \.
 
 
@@ -591,6 +568,22 @@ SELECT pg_catalog.setval('decisions_decision_id_seq', 25, true);
 --
 
 COPY decisionsmade (made_id, char_id, decision_id, outcome_id) FROM stdin;
+3	1	1	1
+4	1	2	3
+5	1	3	5
+6	1	4	7
+7	1	5	9
+8	1	6	13
+9	1	7	19
+10	1	14	43
+11	1	15	45
+12	1	17	47
+13	1	8	22
+14	1	9	26
+15	1	10	27
+16	1	11	30
+17	1	12	32
+18	1	13	40
 \.
 
 
@@ -598,7 +591,7 @@ COPY decisionsmade (made_id, char_id, decision_id, outcome_id) FROM stdin;
 -- Name: decisionsmade_made_id_seq; Type: SEQUENCE SET; Schema: public; Owner: taliatrilling
 --
 
-SELECT pg_catalog.setval('decisionsmade_made_id_seq', 2, true);
+SELECT pg_catalog.setval('decisionsmade_made_id_seq', 18, true);
 
 
 --

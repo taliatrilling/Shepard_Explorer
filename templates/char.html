@@ -3,25 +3,60 @@
 
 {% block content %}
 
-{% if one != None %}
+<div class="container-fluid">
+
+{% if one|length >= 1  %}
+
+<h2>Mass Effect</h2>
+	
+	{% for key, value in one.items() %}
+		{% for k, v in value.items() %}
+			{% if k == "outcome_desc" %}
+				{{ v }}<br><br>
+			{% endif %}
+
+	{% endfor %}
+
+	{% endfor %}
+
+
+{% endif %}
+
+{% if two|length >= 1 %}
+
+<h2>Mass Effect 2</h2>
+
+	{% for key, value in two.items() %}
+		{% for k, v in value.items() %}
+			{% if k == "outcome_desc" %}
+				{{ v }}<br><br>
+			{% endif %}
+
+	{% endfor %}
+
+	{% endfor %}
 
 
 {% endif %}
 
 
-{% if two != None %}
+{% if three|length >= 1 %}
 
+<h2>Mass Effect 3</h2>
+
+	{% for key, value in three.items() %}
+		{% for k, v in value.items() %}
+			{% if k == "outcome_desc" %}
+				{{ v }}<br><br>
+			{% endif %}
+
+	{% endfor %}
+
+	{% endfor %}
 
 
 {% endif %}
 
-
-
-{% if three != None %}
-
-
-
-{% endif %}
-
+</div>
 
 {% endblock %}

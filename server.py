@@ -2,7 +2,7 @@
 
 from flask import (Flask, render_template, redirect, request, session, flash, jsonify, url_for)
 
-from model import User, Character, Decision, Outcome, DecisionMade, Squadmate, SquadOutcome, connect_to_db, db
+from model import User, Character, Decision, Outcome, DecisionMade, Squadmate, SquadOutcome, DecisionDescription, OutcomeDescription, connect_to_db, db
 
 from jinja2 import StrictUndefined
 
@@ -195,10 +195,10 @@ def get_all_open_decisions_for_game(char_id, relevant_game_num):
 			open_decisions.append(decision.decision_id)
 	return open_decisions
 
-def get_decision_description(decision_id):
-	"""For a decision, get its description"""
+# def get_decision_description(decision_id):
+# 	"""For a decision, get its description"""
 	
-	return ((DecisionDescription.query.filter(DecisionDescription.decision_id == decision_id).first()).text)
+# 	return ((DecisionDescription.query.filter(DecisionDescription.decision_id == decision_id).first()).text)
 
 def get_outcome_description(outcome_id):
 	"""For an outcome, get its description"""
@@ -216,11 +216,12 @@ def get_decision_summary_dict(char_id, game_num):
 		DecisionMade.decision_id.in_(eligible)).all()
 	summaries = {}
 	for decision in decisions:
-		for_summaries[decision_id] = decision.decision_id
-		for_summaries[outcome_id] = decision.outcome_id
-		for_summaries[decision_desc] = get_decision_description(decision.decision_id)
-		for_summaries[outcome_desc] = get_outcome_description(decision.outcome_id)
-		for_summaries[relevant_game_num] = decision.decision.associated_game
+		for_summaries = {}
+		for_summaries["decision_id"] = decision.decision_id
+		for_summaries["outcome_id"] = decision.outcome_id
+		# for_summaries["decision_desc"] = get_decision_description(decision.decision_id)
+		for_summaries["outcome_desc"] = get_outcome_description(decision.outcome_id)
+		for_summaries["relevant_game_num"] = decision.decision.associated_game
 		summaries[decision.decision.decision] = for_summaries
 	return summaries
 
