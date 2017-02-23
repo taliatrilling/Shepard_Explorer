@@ -5,36 +5,38 @@
 
 <div class="container-fluid">
 
+<h2>Summary for {{ char.shep_name }} Shepard</h2>
+
 {% if one|length >= 1  %}
 
-<h2>Mass Effect</h2>
-	
-	{% for key, value in one.items() %}
-		{% for k, v in value.items() %}
-			{% if k == "outcome_desc" %}
-				{{ v }}<br><br>
-			{% endif %}
+	<h2>Mass Effect</h2>
+		
+		{% for key, value in one.items() %}
+			{% for k, v in value.items() %}
+				{% if k == "outcome_desc" %}
+					{{ v }}<br><br>
+				{% endif %}
 
-	{% endfor %}
+		{% endfor %}
 
-	{% endfor %}
+		{% endfor %}
 
 
 {% endif %}
 
 {% if two|length >= 1 %}
 
-<h2>Mass Effect 2</h2>
+	<h2>Mass Effect 2</h2>
 
-	{% for key, value in two.items() %}
-		{% for k, v in value.items() %}
-			{% if k == "outcome_desc" %}
-				{{ v }}<br><br>
-			{% endif %}
+		{% for key, value in two.items() %}
+			{% for k, v in value.items() %}
+				{% if k == "outcome_desc" %}
+					{{ v }}<br><br>
+				{% endif %}
 
-	{% endfor %}
+		{% endfor %}
 
-	{% endfor %}
+		{% endfor %}
 
 
 {% endif %}
@@ -42,17 +44,17 @@
 
 {% if three|length >= 1 %}
 
-<h2>Mass Effect 3</h2>
+	<h2>Mass Effect 3</h2>
 
-	{% for key, value in three.items() %}
-		{% for k, v in value.items() %}
-			{% if k == "outcome_desc" %}
-				{{ v }}<br><br>
-			{% endif %}
+		{% for key, value in three.items() %}
+			{% for k, v in value.items() %}
+				{% if k == "outcome_desc" %}
+					{{ v }}<br><br>
+				{% endif %}
 
-	{% endfor %}
+		{% endfor %}
 
-	{% endfor %}
+		{% endfor %}
 
 
 {% endif %}

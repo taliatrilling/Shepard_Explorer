@@ -1,8 +1,102 @@
 {% extends "base.html" %}
-{% block title %}Character Stats{% endblock %}
+{% block title %}Character Stats: Edit/Review{% endblock %}
 
 {% block content %}
 
+<div class="container-fluid">
 
+<h2>Summary for {{ char.shep_name }} Shepard: Edit/Review</h2>
+<a href="/char/{{ char.char_id }}">Link to sharable character stats page</a><br>
+<a href="/delete-char/{{ char.char_id }}">Delete character</a><br>
+
+<h2>Decisions currently undefined for player character:</h2>
+
+{% if one_open|length >= 1 %}
+
+	<h3>Mass Effect</h3>
+
+	{% for item in one_desc %}
+		{{ item }}
+	{% endfor %}
+
+{% endif %}
+
+{% if two_open|length >= 1  %}
+
+	<h3>Mass Effect 2</h3>
+
+	{% for item in two_desc %}
+		{{ item }}
+	{% endfor %}
+
+{% endif %}
+
+{% if three_open|length >= 1  %}
+
+	<h3>Mass Effect 3</h3>
+
+	{% for item in three_desc %}
+		{{ item }}
+	{% endfor %}
+
+{% endif %}
+
+{% if one_open|length == 0 and two_open|length == 0 and three_open|length == 0 %}
+	
+	<h3>There are currently no undefined decisions for this character. You may edit existing decisions below if so desired.</h3>
+
+{% endif %}
+
+{% if one|length >= 1  %}
+
+<h2>Mass Effect</h2>
+	
+	{% for key, value in one.items() %}
+		{% for k, v in value.items() %}
+			{% if k == "outcome_desc" %}
+				{{ v }}<br><br>
+			{% endif %}
+		{% endfor %}	
+	{% endfor %}
+
+
+{% endif %}
+
+{% if two|length >= 1 %}
+
+<h2>Mass Effect 2</h2>
+
+	{% for key, value in two.items() %}
+		{% for k, v in value.items() %}
+			{% if k == "outcome_desc" %}
+				{{ v }}<br><br>
+			{% endif %}
+
+	{% endfor %}
+
+	{% endfor %}
+
+
+{% endif %}
+
+
+{% if three|length >= 1 %}
+
+<h2>Mass Effect 3</h2>
+
+	{% for key, value in three.items() %}
+		{% for k, v in value.items() %}
+			{% if k == "outcome_desc" %}
+				{{ v }}<br><br>
+			{% endif %}
+
+	{% endfor %}
+
+	{% endfor %}
+
+
+{% endif %}
+
+</div>
 
 {% endblock %}

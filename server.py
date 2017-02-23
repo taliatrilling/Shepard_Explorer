@@ -189,10 +189,11 @@ def get_all_open_decisions_for_game(char_id, relevant_game_num):
 
 	all_decisions = Decision.query.filter(Decision.associated_game == relevant_game_num).all()
 	decisions_already_made = DecisionMade.query.filter(DecisionMade.char_id == char_id).all()
+	to_check = [decision.decision_id for decision in decisions_already_made]
 	open_decisions = []
 	for decision in all_decisions:
-		if decision.decision_id not in decisions_already_made:
-			open_decisions.append(decision.decision_id)
+		if decision.decision_id not in to_check:
+			open_decisions.append(decision)
 	return open_decisions
 
 def get_decision_description(decision_id):
@@ -400,7 +401,44 @@ def delete_char_result():
 def char_stats(char_id):
 	"""Displays existing stats for a character as well as options to update/add"""
 
-	pass
+	char = Character.query.filter(Character.char_id == char_id).first()
+	if "user_id" not in session:
+		flash("Please log in to edit a character")
+		return redirect("/")
+	user_id = session["user_id"]
+	if user_id != char.user_id:
+		flash("Your current account does not have access to editing this character")
+		return redirect("/")
+	if char.played_1:
+		one = get_decision_summary_dict(char_id, 1)
+		one_open = get_all_open_decisions_for_game(char_id, 1)
+		one_desc = []
+		for item in one_open:
+			one_desc.append(get_decision_description(item.decision_id))
+	else:
+		one = None
+		one_open = None
+	if char.played_2:
+		two = get_decision_summary_dict(char_id, 2)
+		two_open = get_all_open_decisions_for_game(char_id, 2)
+		two_desc = []
+		for item in two_open:
+			two_desc.append(get_decision_description(item.decision_id))
+	else:
+		two = None
+		two_open = None
+	if char.played_3:
+		three = get_decision_summary_dict(char_id, 3)
+		three_open = get_all_open_decisions_for_game(char_id, 3)
+		three_desc = []
+		for item in three_open:
+			three_desc.append(get_decision_description(item.decision_id))
+	else:
+		three = None
+		three_open = None
+
+	return render_template("char_stats.html", char=char, one=one, one_open=one_open, one_desc=one_desc, 
+		two=two, two_open=two_open, two_desc=two_desc, three=three, three_open=three_open, three_desc=three_desc)
 
 
 @app.route("/char/<int:char_id>")
