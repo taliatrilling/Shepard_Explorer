@@ -16,8 +16,13 @@
 	<h3>Mass Effect</h3>
 
 	{% for item in one_desc %}
-		{{ item }}
+		{{ item["desc"] }}<br>
+			{% for item2 in item["options"] %}
+				<input type="radio" name="{{ item['id'] }}" value="{{ item2.outcome_id }}"> {{ item2.outcome_id | get_desc }}<br>
+			{% endfor %}
+		<br>
 	{% endfor %}
+	<br>
 
 {% endif %}
 
@@ -26,8 +31,13 @@
 	<h3>Mass Effect 2</h3>
 
 	{% for item in two_desc %}
-		{{ item }}
+		{{ item["desc"] }}<br>
+			{% for item2 in item["options"] %}
+				<input type="radio" name="{{ item['id'] }}" value="{{ item2.outcome_id }}"> {{ item2.outcome_id | get_desc }}<br>
+			{% endfor %}
+		<br>
 	{% endfor %}
+	<br>
 
 {% endif %}
 
@@ -36,9 +46,14 @@
 	<h3>Mass Effect 3</h3>
 
 	{% for item in three_desc %}
-		{{ item }}
+		{{ item["desc"] }}<br>
+			{% for item2 in item["options"] %}
+				<input type="radio" name="{{ item['id'] }}" value="{{ item2.outcome_id }}"> {{ item2.outcome_id | get_desc }}<br>
+			{% endfor %}
+		<br>
 	{% endfor %}
-
+	<br>
+	
 {% endif %}
 
 {% if one_open|length == 0 and two_open|length == 0 and three_open|length == 0 %}

@@ -226,6 +226,13 @@ def get_decision_summary_dict(char_id, game_num):
 		summaries[decision.decision.decision] = for_summaries
 	return summaries
 
+@app.template_filter("get_desc")
+def get_desc_for_template_form(outcome_id):
+	"""Templating filter for get_outcome_description function, so that can be easily used in jinja2 template 
+	for form purposes"""
+
+	return get_outcome_description(outcome_id)
+
 #route functions
 
 @app.route("/")
@@ -414,7 +421,11 @@ def char_stats(char_id):
 		one_open = get_all_open_decisions_for_game(char_id, 1)
 		one_desc = []
 		for item in one_open:
-			one_desc.append(get_decision_description(item.decision_id))
+			details = {}
+			details["desc"] = get_decision_description(item.decision_id)
+			details["options"] = get_possible_outcomes(item.decision_id)
+			details["id"] = item.decision_id
+			one_desc.append(details)
 	else:
 		one = None
 		one_open = None
@@ -423,7 +434,11 @@ def char_stats(char_id):
 		two_open = get_all_open_decisions_for_game(char_id, 2)
 		two_desc = []
 		for item in two_open:
-			two_desc.append(get_decision_description(item.decision_id))
+			details = {}
+			details["desc"] = get_decision_description(item.decision_id)
+			details["options"] = get_possible_outcomes(item.decision_id)
+			details["id"] = item.decision_id
+			two_desc.append(details)
 	else:
 		two = None
 		two_open = None
@@ -432,7 +447,11 @@ def char_stats(char_id):
 		three_open = get_all_open_decisions_for_game(char_id, 3)
 		three_desc = []
 		for item in three_open:
-			three_desc.append(get_decision_description(item.decision_id))
+			details = {}
+			details["desc"] = get_decision_description(item.decision_id)
+			details["options"] = get_possible_outcomes(item.decision_id)
+			details["id"] = item.decision_id
+			three_desc.append(details)
 	else:
 		three = None
 		three_open = None
