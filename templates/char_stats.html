@@ -9,7 +9,11 @@
 <a href="/char/{{ char.char_id }}">Link to sharable character stats page</a><br>
 <a href="/delete-char/{{ char.char_id }}">Delete character</a><br>
 
+<b><a href="/char-management">Return to character managament without making changes</a></b>
+
 <h2>Decisions currently undefined for player character:</h2>
+
+<form action="" method="POST">
 
 {% if one_open|length >= 1 %}
 
@@ -111,6 +115,10 @@
 
 
 {% endif %}
+
+<input type="submit" value="Save Changes">
+
+</form>
 
 </div>
 
