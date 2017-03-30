@@ -1,4 +1,4 @@
-# Shepard Explorer -- Overview of WIP:
+# Shepard Explorer - Overview of WIP:
 
   - Personal project in Python/Flask with the goal of exploring the most effective way to interface with a large and dynamic database that needs to store multitudes of user choices while recognizing that each user may vary in the extent that they are able or willing to report game outcomes
   - Secondary goal of experimenting with AngularJS to build the frontend as well as ChartJS to allow for users to interact with gameplay metrics
@@ -25,6 +25,6 @@ Finally, navigate your browser to http://localhost:5000/
 
 # About Me
 
-I am a graduate of Pitzer College as well as Hackbright Academy working in the San Francisco Bay Area as a software engineer. My unique academic background in psychology research and media studies allows me to bring a multidisciplinary perspective to any project, and I love discovering new and unique ways to interact with technology. Please feel free to reach out to me with any questions you may have about my work.
-[LinkedIn](http://www.linkedin.com/in/taliatrilling)
+I am a graduate of Pitzer College as well as Hackbright Academy working in the San Francisco Bay Area as a software engineer. My unique academic background in psychology research and media studies allows me to bring a multidisciplinary perspective to any project, and I love discovering new and unique ways to interact with technology. Please feel free to reach out to me with any questions you may have about my work.<br>
+[LinkedIn](http://www.linkedin.com/in/taliatrilling)<br>
 [Personal Website](http://taliatrilling.github.io)
