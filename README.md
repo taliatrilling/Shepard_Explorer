@@ -25,6 +25,6 @@ Finally, navigate your browser to http://localhost:5000/
 
 # About Me
 
-I am a graduate of Pitzer College as well as Hackbright Academy working in the San Francisco Bay Area as a software engineer. My unique academic background in psychology research and media studies allows me to bring a multidisciplinary perspective to any project, and I love discovering new and unique ways to interact with technology. Please feel free to reach out to me with any questions you may have about my work.<br>
+I am a software engineer based out of the San Francisco Bay Area working on the development of a SaaS application. My unique academic background in psychology research and media studies allows me to bring a multidisciplinary perspective to any project, and I love discovering new and unique ways to interact with technology. Please feel free to reach out to me with any questions you may have about my work.<br>
 [LinkedIn](http://www.linkedin.com/in/taliatrilling)<br>
 [Personal Website](http://taliatrilling.github.io)

@@ -482,6 +482,14 @@ def display_char(char_id):
 	return render_template("char.html", char=char, one=one, two=two, three=three)
 
 
+@app.route("/update-char-stats/<int:char_id>", methods=["POST"])
+def update_existing_char(char_id):
+	""" """
+
+	char = Character.query.filter(Character.char_id == char_id).first()
+	
+
+
 if __name__ == "__main__":
 	app.debug = True
 	connect_to_db(app)

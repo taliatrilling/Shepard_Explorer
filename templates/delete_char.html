@@ -3,15 +3,18 @@
 
 {% block content %}
 
-Are you sure you want to delete {{ char.shep_name }}?
+<div class="container-fluid">
 
-<form action="/delete-char-result" method="POST">
-	<input type="hidden" name="char_id" value="{{ char.char_id }}" readonly>
-	<input type="submit" value="Yes, I'm sure">
-</form>
-<form action="/" method="GET">
-	<input type="submit" value="No, please take me back to safety!">
-</form>
+	Are you sure you want to delete {{ char.shep_name }}?
 
+	<form action="/delete-char-result" method="POST">
+		<input type="hidden" name="char_id" value="{{ char.char_id }}" readonly><br>
+		<input type="submit" value="Yes, I'm sure">
+	</form>
+	<form action="/" method="GET"><br>
+		<input type="submit" value="No, please take me back to safety!">
+	</form>
+
+</div>
 
 {% endblock %}

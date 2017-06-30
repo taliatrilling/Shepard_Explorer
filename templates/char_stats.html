@@ -66,6 +66,14 @@
 
 {% endif %}
 
+<h2>Decisions currently set for character:</h2>
+
+{% if one|length == 0 and two|length == 0 and three|length == 0 %}
+	
+	<h3>There are currently no set decisions for this character. You may edit undefined decisions above.</h3>
+
+{% endif %}
+
 {% if one|length >= 1  %}
 
 <h2>Mass Effect</h2>
