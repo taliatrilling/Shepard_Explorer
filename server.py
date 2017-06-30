@@ -427,8 +427,9 @@ def char_stats(char_id):
 			details["id"] = item.decision_id
 			one_desc.append(details)
 	else:
-		one = None
-		one_open = None
+		one = []
+		one_open = []
+		one_desc = []
 	if char.played_2:
 		two = get_decision_summary_dict(char_id, 2)
 		two_open = get_all_open_decisions_for_game(char_id, 2)
@@ -440,8 +441,9 @@ def char_stats(char_id):
 			details["id"] = item.decision_id
 			two_desc.append(details)
 	else:
-		two = None
-		two_open = None
+		two = []
+		two_open = []
+		two_desc = []
 	if char.played_3:
 		three = get_decision_summary_dict(char_id, 3)
 		three_open = get_all_open_decisions_for_game(char_id, 3)
@@ -453,8 +455,11 @@ def char_stats(char_id):
 			details["id"] = item.decision_id
 			three_desc.append(details)
 	else:
-		three = None
-		three_open = None
+		three = []
+		three_open = []
+		three_desc = []
+
+	#change template to make established decisions changable
 
 	return render_template("char_stats.html", char=char, one=one, one_open=one_open, one_desc=one_desc, 
 		two=two, two_open=two_open, two_desc=two_desc, three=three, three_open=three_open, three_desc=three_desc)
@@ -482,12 +487,18 @@ def display_char(char_id):
 	return render_template("char.html", char=char, one=one, two=two, three=three)
 
 
-@app.route("/update-char-stats/<int:char_id>", methods=["POST"])
+@app.route("/update-char-stats/<int:char_id>", methods=["POST", "GET"])
 def update_existing_char(char_id):
-	""" """
+	"""Put updated character info in DB, if the user is authorized"""
 
+	if request.method == "GET": 
+		flash("This is not a valid use of this URL, please use character management to make changes to your characters.")
+		return redirect("/")
 	char = Character.query.filter(Character.char_id == char_id).first()
-	
+	if "user_id" not in session or char.user_id != session["user_id"]:
+		flash("You do not have the authority to make changes to this character. If this is your character, please make sure you are logged into your account.")
+		return redirect("/")
+	#update db, need to identify changes from what prepopulated, maybe look at django code
 
 
 if __name__ == "__main__":
