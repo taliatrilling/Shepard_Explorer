@@ -13,7 +13,7 @@
 
 <h2>Decisions currently undefined for player character:</h2>
 
-<form action="/update-char-stats/{{ char.char_id }}" method="POST">
+<form action="/add-char-stats/{{ char.char_id }}" method="POST">
 
 {% if one_open|length >= 1 %}
 
@@ -81,7 +81,8 @@
 	{% for key, value in one.items() %}
 		{% for k, v in value.items() %}
 			{% if k == "outcome_desc" %}
-				{{ v }}<br><br>
+				{{ v }}<br>
+				Change this decision!<br><br>
 			{% endif %}
 		{% endfor %}	
 	{% endfor %}
@@ -96,7 +97,8 @@
 	{% for key, value in two.items() %}
 		{% for k, v in value.items() %}
 			{% if k == "outcome_desc" %}
-				{{ v }}<br><br>
+				{{ v }}<br>
+				Change this decision!<br><br>
 			{% endif %}
 
 	{% endfor %}
@@ -114,7 +116,8 @@
 	{% for key, value in three.items() %}
 		{% for k, v in value.items() %}
 			{% if k == "outcome_desc" %}
-				{{ v }}<br><br>
+				{{ v }}<br>
+				Change this decision!<br><br>
 			{% endif %}
 
 	{% endfor %}

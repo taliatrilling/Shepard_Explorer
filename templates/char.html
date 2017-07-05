@@ -59,6 +59,12 @@
 
 {% endif %}
 
+{% if (one|length == 0) and (two|length == 0) and  (three|length == 0) %}
+	
+	There are no stats currently set for this character. 
+
+{% endif %}
+
 </div>
 
 {% endblock %}

@@ -474,22 +474,24 @@ def display_char(char_id):
 	if char.played_1:
 		one = get_decision_summary_dict(char_id, 1)
 	else:
-		one = None
+		one = []
 	if char.played_2:
 		two = get_decision_summary_dict(char_id, 2)
 	else:
-		two = None
+		two = []
 	if char.played_3:
 		three = get_decision_summary_dict(char_id, 3)
 	else:
-		three = None
+		three = []
 
 	return render_template("char.html", char=char, one=one, two=two, three=three)
 
 
-@app.route("/update-char-stats/<int:char_id>", methods=["POST", "GET"])
+@app.route("/add-char-stats/<int:char_id>", methods=["POST", "GET"])
 def update_existing_char(char_id):
-	"""Put updated character info in DB, if the user is authorized"""
+	"""Put new character info in DB, if the user is authorized -- distinction between
+	this route, which adds info for decisions that weren't already specified, different
+	route used for updating already defined decisions"""
 
 	if request.method == "GET": 
 		flash("This is not a valid use of this URL, please use character management to make changes to your characters.")
@@ -498,7 +500,9 @@ def update_existing_char(char_id):
 	if "user_id" not in session or char.user_id != session["user_id"]:
 		flash("You do not have the authority to make changes to this character. If this is your character, please make sure you are logged into your account.")
 		return redirect("/")
-	#update db, need to identify changes from what prepopulated, maybe look at django code
+
+
+	#update db
 
 
 if __name__ == "__main__":
