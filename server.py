@@ -174,6 +174,12 @@ def check_char_ownership(char_id, user_id):
 		return False
 	return True
 
+def get_char_name(char_id):
+	"""Gets character name from character id"""
+
+	char = Character.query.filter(Character.char_id == char_id).first()
+	return char.shep_name
+
 def delete_char(char_id, user_id):
 	"""If a user has ownership, deletes a character from the db"""
 
@@ -225,6 +231,12 @@ def get_decision_summary_dict(char_id, game_num):
 		for_summaries["relevant_game_num"] = decision.decision.associated_game
 		summaries[decision.decision.decision] = for_summaries
 	return summaries
+
+def get_decision_obj_from_decision_id(char_id, decision_id):
+	"""Gets the actual decision made object from the id, so that can be updated in the db"""
+
+	obj = DecisionMade.query.filter(DecisionMade.char_id == char_id, DecisionMade.decision_id == decision_id).first()
+	return obj
 
 @app.template_filter("get_desc")
 def get_desc_for_template_form(outcome_id):
@@ -509,6 +521,33 @@ def update_existing_char(char_id):
 			return redirect("/")
 	flash("Your changes have been successfully made.")
 	return redirect("/")
+
+@app.route("/update-existing-dec/<int:char_id>/<int:decision_id>", methods=["POST", "GET"])
+def change_existing_decision_for_char(char_id, decision_id):
+	""" """
+
+	if "user_id" not in session or char.user_id != session["user_id"]:
+		flash("You do not have the authority to make changes to this character. If this is your character, please make sure you are logged into your account.")
+		return redirect("/")
+	if request.method == "GET":
+		desc_of_changing = get_decision_description(decision_id)
+		outcomes = get_possible_outcomes(decision_id)
+		options = []
+		for outcome in outcomes:
+			options.append({outcome, get_outcome_description(outcome_id)})
+		char_name = get_char_name(char_id)
+		return render_template("update_decision.html", options=options, 
+			desc_of_changing=desc_of_changing, char_name=char_name)
+	dec_obj = get_decision_obj_from_decision_id(char_id, decision_id)
+	dec_obj.outcome_id = request.form.get("chosen")
+	db.session.commit()
+	flash("You have successfully made updates to your character")
+	return redirect("/char-stats/" + char_id)
+
+
+
+
+
 
 ## ADD CSRF TOKENS TO TEMPLATES WITH FORMS!
 

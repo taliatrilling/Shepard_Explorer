@@ -82,7 +82,7 @@
 		{% for k, v in value.items() %}
 			{% if k == "outcome_desc" %}
 				{{ v }}<br>
-				Change this decision!<br><br>
+				<a href="/update-existing-dec/{{ char.char_id }}/{{ value['decision_id'] }}">Change this decision!</a><br><br>
 			{% endif %}
 		{% endfor %}	
 	{% endfor %}
@@ -98,7 +98,7 @@
 		{% for k, v in value.items() %}
 			{% if k == "outcome_desc" %}
 				{{ v }}<br>
-				Change this decision!<br><br>
+				<a href="/update-existing-dec/{{ char.char_id }}/{{ value['decision_id'] }}">Change this decision!</a><br><br>
 			{% endif %}
 
 	{% endfor %}
@@ -117,7 +117,7 @@
 		{% for k, v in value.items() %}
 			{% if k == "outcome_desc" %}
 				{{ v }}<br>
-				Change this decision!<br><br>
+				<a href="/update-existing-dec/{{ char.char_id }}/{{ value['decision_id'] }}">Change this decision!</a><br><br>
 			{% endif %}
 
 	{% endfor %}
