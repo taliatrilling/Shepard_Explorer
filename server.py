@@ -500,9 +500,17 @@ def update_existing_char(char_id):
 	if "user_id" not in session or char.user_id != session["user_id"]:
 		flash("You do not have the authority to make changes to this character. If this is your character, please make sure you are logged into your account.")
 		return redirect("/")
+	r = request.form
+	for dec in r:
+		outcome = int(request.form.getlist(dec)[0])
+		to_add = add_outcome(session["user_id"], char.char_id, dec, outcome)
+		if to_add is None:
+			flash("An error has occured, please try again")
+			return redirect("/")
+	flash("Your changes have been successfully made.")
+	return redirect("/")
 
-
-	#update db
+## ADD CSRF TOKENS TO TEMPLATES WITH FORMS!
 
 
 if __name__ == "__main__":
